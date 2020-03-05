@@ -8,37 +8,88 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    //Repetions fields
+    //****Attributes****
+    let arrayExercises = ["Supino Reto", "Supino Inclinado", "Flexão Básica", "Paralelas", "Crucifixo Reto"]
+    var pickerView = UIPickerView()
+    
+    //****IBs****
+    
+    //Exercises Fields
+    @IBOutlet var excOne: UITextField!
+    @IBOutlet var excTwo: UITextField!
+    @IBOutlet var excThree: UITextField!
+    @IBOutlet var excFour: UITextField!
+    
+    //Repetions Fields
     @IBOutlet var repOne: UITextField!
     @IBOutlet var repTwo: UITextField!
     @IBOutlet var repThree: UITextField!
     @IBOutlet var repFour: UITextField!
     
-    //Series fields
+    //Series Fields
     @IBOutlet var serOne: UITextField!
     @IBOutlet var serTwo: UITextField!
     @IBOutlet var serThree: UITextField!
     @IBOutlet var serFour: UITextField!
     
-    //Label
+    //Labels
     @IBOutlet var finalResult: UILabel!
     
-    
+    //Buttons
     @IBAction func buttonCalcule() {
-        var arrayRep = getRep()
-        var arraySer = getSer()
-        var result = multiplication(arrayRep: arrayRep, arraySer:arraySer)
+        let arrayRep = getRep()
+        let arraySer = getSer()
+        let result = multiplication(arrayRep: arrayRep, arraySer:arraySer)
         showResult(result: result)
     }
     
+    //****Functions****
     
+    //Swift Functions
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //PickerView
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        //excOne
+        excOne.inputView = pickerView
+        excOne.textAlignment = .center
+        excOne.placeholder = "Selecionar Exercício"
+        //excTwo
+        excTwo.inputView = pickerView
+        excTwo.textAlignment = .center
+        excTwo.placeholder = "Selecionar Exercício"
+        //excThree
+        excThree.inputView = pickerView
+        excThree.textAlignment = .center
+        excThree.placeholder = "Selecionar Exercício"
+        //excFour
+        excFour.inputView = pickerView
+        excFour.textAlignment = .center
+        excFour.placeholder = "Selecionar Exercício"
     }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return arrayExercises.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return arrayExercises[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        excOne.text = arrayExercises[row]
+        excOne.resignFirstResponder()
+    }
+    
+    //My Functions
     func getDate(){
         //Pegar a data do picker
     }
@@ -62,7 +113,6 @@ class ViewController: UIViewController {
         arraySer.append(Int(serFour.text!)!)
         return arraySer
     }
-
     
     func multiplication(arrayRep: [Int], arraySer: [Int]) -> Int {
         var result = 0
@@ -82,7 +132,8 @@ class ViewController: UIViewController {
     
     func showResult(result: Int) {
         //Abre um popup que apresenta um texto com o valor de setSum()
-        finalResult.text = finalResult.text! + String(result) + " minutos"
+        let finalText = "O tempo médio será de: " + String(result) + " minutos"
+        finalResult.text = finalText
     }
     
 }
