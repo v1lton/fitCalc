@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     //****Attributes****
     let arrayExercises = ["Supino Reto", "Supino Inclinado", "Flexão Básica", "Paralelas", "Crucifixo Reto"]
@@ -21,7 +21,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet var excTwo: UITextField!
     @IBOutlet var excThree: UITextField!
     @IBOutlet var excFour: UITextField!
-    
+   
     //Repetions Fields
     @IBOutlet var repOne: UITextField!
     @IBOutlet var repTwo: UITextField!
@@ -50,6 +50,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //Swift Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
         
         //PickerView
         pickerView.delegate = self
@@ -85,8 +88,20 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        excOne.text = arrayExercises[row]
-        excOne.resignFirstResponder()
+        if excOne.isEditing {
+            excOne.text = arrayExercises[row]
+            excOne.resignFirstResponder()
+        } else if excTwo.isEditing {
+            excTwo.text = arrayExercises[row]
+            excTwo.resignFirstResponder()
+        } else if excThree.isEditing {
+            excThree.text = arrayExercises[row]
+            excThree.resignFirstResponder()
+        } else {
+            excFour.text = arrayExercises[row]
+            excFour.resignFirstResponder()
+        }
+        pickerView.selectRow(0, inComponent: 0, animated: false)
     }
     
     //My Functions
