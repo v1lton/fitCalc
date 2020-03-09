@@ -15,7 +15,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     var pickerView = UIPickerView()
     
     //****IBs****
-    
     //Exercises Fields
     @IBOutlet var excOne: UITextField!
     @IBOutlet var excTwo: UITextField!
@@ -73,6 +72,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         excFour.inputView = pickerView
         excFour.textAlignment = .center
         excFour.placeholder = "Selecionar Exercício"
+        
+        print(agachamento.group)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -147,9 +148,22 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func showResult(result: Int) {
         //Abre um popup que apresenta um texto com o valor de setSum()
-        let finalText = "O tempo médio será de: " + String(result) + " minutos"
+        let finalText = "O tempo médio será de: \(result) minutos" // Interpolação bonitinha
         finalResult.text = finalText
     }
     
+    //let agachamento = Exercise(group: "Inferior", title: "Agachamento", time: 0.08)
 }
 
+class Exercise {
+    var title: String
+    var time: Float
+    ///Possible values: "Inferior" or "Superior"
+    var group: String
+    
+    init(group: String, title: String, time: Float) {
+        self.title = title
+        self.time = time
+        self.group = group
+    }
+}
