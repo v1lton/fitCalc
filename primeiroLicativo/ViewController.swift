@@ -8,6 +8,8 @@
 
 import UIKit
 
+let dictionaryExercises = ["Agachamento Smith": 2.0, "Crucifixo Reto": 2.8, "Flexão Básica": 3.0, "Paralelas": 3.8, "Supino Reto": 2.6, "Supino Inclinado": 2.8]
+
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     //****Attributes****
@@ -42,8 +44,9 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let arrayRep = getRep()
         let arraySer = getSer()
         let ficha = Ficha(Exercises: arrayExercises, Series: arraySer, Rep: arrayRep)
-        let result = ficha.valorTotalDaFicha()
-        showResult(result: result)
+        let result = Int(ficha.totalTime())
+        let resultInMinutes = result/60
+        showResult(result: resultInMinutes)
     }
     
     //****Functions****
@@ -107,7 +110,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
             excFour.resignFirstResponder()
             arrayExercises[3] = excFour.text!
         }
-        pickerView.selectRow(0, inComponent: 0, animated: false)
+        pickerView.selectRow(0, inComponent: 0, animated: true)
     }
     
     //My Functions
@@ -157,24 +160,28 @@ class Ficha {
         self.arrayRep = arrayRep
     }
     
-    func valorTotalDaFicha() -> Int {
-        var result = 0
+    func totalTime() -> Double {
+        var result: Double = 0
+        
         for i in 0...3 {
-            result = result + (arrayRep[i] * arraySerie[i])
+            let actualExercise: String = arrayExercise[i]
+            let arrayRepDouble: Double = Double(arrayRep[i])
+            let arraySerieDouble: Double = Double(arraySerie[i])
+            result = result + dictionaryExercises[actualExercise]! * arrayRepDouble * arraySerieDouble
         }
+        
+        result = result + Double(restTime())
         return result
     }
+    
+    func restTime() -> Int {
+        var resultInMinutes: Int = 0
+        
+        for i in 0...3 {
+            resultInMinutes = resultInMinutes + arraySerie[i]
+        }
+        
+        let resultInSeconds = resultInMinutes * 60
+        return resultInSeconds
+    }
 }
-
-//class Exercise {
-//    var title: String
-//    var time: Float
-//    ///Possible values: "Inferior" or "Superior"
-//    var group: String
-//
-//    init(group: String, title: String, time: Float) {
-//        self.title = title
-//        self.time = time
-//        self.group = group
-//    }
-//}
