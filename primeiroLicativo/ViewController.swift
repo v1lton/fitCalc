@@ -23,7 +23,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet var excTwo: UITextField!
     @IBOutlet var excThree: UITextField!
     @IBOutlet var excFour: UITextField!
-   
+    
     //Repetions Fields
     @IBOutlet var repOne: UITextField!
     @IBOutlet var repTwo: UITextField!
@@ -57,7 +57,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
-    
         
         //PickerView
         pickerView.delegate = self
@@ -146,42 +145,5 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         //Abre um popup que apresenta um texto com o valor de setSum()
         let finalText = "O tempo médio será de: \(result) minutos" // Interpolação bonitinha
         finalResult.text = finalText
-    }
-}
-
-class Ficha {
-    var arrayExercise: [String]
-    var arraySerie: [Int]
-    var arrayRep: [Int]
-    
-    init(Exercises arrayExercise: [String], Series arraySerie: [Int], Rep arrayRep: [Int]) {
-        self.arrayExercise = arrayExercise
-        self.arraySerie = arraySerie
-        self.arrayRep = arrayRep
-    }
-    
-    func totalTime() -> Double {
-        var result: Double = 0
-        
-        for i in 0...3 {
-            let actualExercise: String = arrayExercise[i]
-            let arrayRepDouble: Double = Double(arrayRep[i])
-            let arraySerieDouble: Double = Double(arraySerie[i])
-            result = result + dictionaryExercises[actualExercise]! * arrayRepDouble * arraySerieDouble
-        }
-        
-        result = result + Double(restTime())
-        return result
-    }
-    
-    func restTime() -> Int {
-        var resultInMinutes: Int = 0
-        
-        for i in 0...3 {
-            resultInMinutes = resultInMinutes + arraySerie[i]
-        }
-        
-        let resultInSeconds = resultInMinutes * 60
-        return resultInSeconds
     }
 }

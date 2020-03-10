@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		890F66FE241829AF00F46FF3 /* Ficha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F66FD241829AF00F46FF3 /* Ficha.swift */; };
 		89646407240D80390065DBBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89646406240D80390065DBBB /* AppDelegate.swift */; };
 		89646409240D80390065DBBB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89646408240D80390065DBBB /* SceneDelegate.swift */; };
 		8964640B240D80390065DBBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964640A240D80390065DBBB /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		890F66FD241829AF00F46FF3 /* Ficha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ficha.swift; sourceTree = "<group>"; };
 		89646403240D80390065DBBB /* primeiroLicativo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = primeiroLicativo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89646406240D80390065DBBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89646408240D80390065DBBB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				89646406240D80390065DBBB /* AppDelegate.swift */,
 				89646408240D80390065DBBB /* SceneDelegate.swift */,
 				8964640A240D80390065DBBB /* ViewController.swift */,
+				890F66FD241829AF00F46FF3 /* Ficha.swift */,
 				8964640C240D80390065DBBB /* Main.storyboard */,
 				8964640F240D803D0065DBBB /* Assets.xcassets */,
 				89646411240D803D0065DBBB /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8964640B240D80390065DBBB /* ViewController.swift in Sources */,
+				890F66FE241829AF00F46FF3 /* Ficha.swift in Sources */,
 				89646407240D80390065DBBB /* AppDelegate.swift in Sources */,
 				89646409240D80390065DBBB /* SceneDelegate.swift in Sources */,
 			);
