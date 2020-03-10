@@ -11,8 +11,9 @@ import UIKit
 class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     //****Attributes****
-    let arrayExercises = ["Supino Reto", "Supino Inclinado", "Flexão Básica", "Paralelas", "Crucifixo Reto"]
+    let arrayExercisesToPickerView = ["Agachamento Smith", "Crucifixo Reto", "Flexão Básica", "Paralelas", "Supino Reto", "Supino Inclinado"]
     var pickerView = UIPickerView()
+    var arrayExercises = ["", "", "", ""]
     
     //****IBs****
     //Exercises Fields
@@ -40,7 +41,8 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBAction func buttonCalcule() {
         let arrayRep = getRep()
         let arraySer = getSer()
-        let result = multiplication(arrayRep: arrayRep, arraySer:arraySer)
+        let ficha = Ficha(Exercises: arrayExercises, Series: arraySer, Rep: arrayRep)
+        let result = ficha.valorTotalDaFicha()
         showResult(result: result)
     }
     
@@ -52,6 +54,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
+    
         
         //PickerView
         pickerView.delegate = self
@@ -72,8 +75,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         excFour.inputView = pickerView
         excFour.textAlignment = .center
         excFour.placeholder = "Selecionar Exercício"
-        
-        print(agachamento.group)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -81,35 +82,35 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return arrayExercises.count
+        return arrayExercisesToPickerView.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return arrayExercises[row]
+        return arrayExercisesToPickerView[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if excOne.isEditing {
-            excOne.text = arrayExercises[row]
+            excOne.text = arrayExercisesToPickerView[row]
             excOne.resignFirstResponder()
+            arrayExercises[0] = excOne.text!
         } else if excTwo.isEditing {
-            excTwo.text = arrayExercises[row]
+            excTwo.text = arrayExercisesToPickerView[row]
             excTwo.resignFirstResponder()
+            arrayExercises[1] = excTwo.text!
         } else if excThree.isEditing {
-            excThree.text = arrayExercises[row]
+            excThree.text = arrayExercisesToPickerView[row]
             excThree.resignFirstResponder()
+            arrayExercises[2] = excThree.text!
         } else {
-            excFour.text = arrayExercises[row]
+            excFour.text = arrayExercisesToPickerView[row]
             excFour.resignFirstResponder()
+            arrayExercises[3] = excFour.text!
         }
         pickerView.selectRow(0, inComponent: 0, animated: false)
     }
     
     //My Functions
-    func getDate(){
-        //Pegar a data do picker
-    }
-    
     func getRep() -> [Int] {
         //Pega os dados de Repetições
         var arrayRep = [Int]()
@@ -130,14 +131,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         return arraySer
     }
     
-    func multiplication(arrayRep: [Int], arraySer: [Int]) -> Int {
-        var result = 0
-        for i in 0...3 {
-            result = result + (arrayRep[i] * arraySer[i])
-        }
-        return result
-    }
-    
     func setSum() {
         //Soma os valores de getInputs()
     }
@@ -151,19 +144,37 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         let finalText = "O tempo médio será de: \(result) minutos" // Interpolação bonitinha
         finalResult.text = finalText
     }
-    
-    //let agachamento = Exercise(group: "Inferior", title: "Agachamento", time: 0.08)
 }
 
-class Exercise {
-    var title: String
-    var time: Float
-    ///Possible values: "Inferior" or "Superior"
-    var group: String
+class Ficha {
+    var arrayExercise: [String]
+    var arraySerie: [Int]
+    var arrayRep: [Int]
     
-    init(group: String, title: String, time: Float) {
-        self.title = title
-        self.time = time
-        self.group = group
+    init(Exercises arrayExercise: [String], Series arraySerie: [Int], Rep arrayRep: [Int]) {
+        self.arrayExercise = arrayExercise
+        self.arraySerie = arraySerie
+        self.arrayRep = arrayRep
+    }
+    
+    func valorTotalDaFicha() -> Int {
+        var result = 0
+        for i in 0...3 {
+            result = result + (arrayRep[i] * arraySerie[i])
+        }
+        return result
     }
 }
+
+//class Exercise {
+//    var title: String
+//    var time: Float
+//    ///Possible values: "Inferior" or "Superior"
+//    var group: String
+//
+//    init(group: String, title: String, time: Float) {
+//        self.title = title
+//        self.time = time
+//        self.group = group
+//    }
+//}
