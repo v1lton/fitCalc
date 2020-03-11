@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		890F66FE241829AF00F46FF3 /* Ficha.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F66FD241829AF00F46FF3 /* Ficha.swift */; };
+		890F670024190F8700F46FF3 /* trainingSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F66FF24190F8700F46FF3 /* trainingSheetTableViewCell.swift */; };
 		89646407240D80390065DBBB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89646406240D80390065DBBB /* AppDelegate.swift */; };
 		89646409240D80390065DBBB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89646408240D80390065DBBB /* SceneDelegate.swift */; };
 		8964640B240D80390065DBBB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964640A240D80390065DBBB /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		890F66FD241829AF00F46FF3 /* Ficha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ficha.swift; sourceTree = "<group>"; };
+		890F66FF24190F8700F46FF3 /* trainingSheetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = trainingSheetTableViewCell.swift; sourceTree = "<group>"; };
 		89646403240D80390065DBBB /* primeiroLicativo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = primeiroLicativo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89646406240D80390065DBBB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89646408240D80390065DBBB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				8964640A240D80390065DBBB /* ViewController.swift */,
 				890F66FD241829AF00F46FF3 /* Ficha.swift */,
 				8964640C240D80390065DBBB /* Main.storyboard */,
+				890F66FF24190F8700F46FF3 /* trainingSheetTableViewCell.swift */,
 				8964640F240D803D0065DBBB /* Assets.xcassets */,
 				89646411240D803D0065DBBB /* LaunchScreen.storyboard */,
 				89646414240D803D0065DBBB /* Info.plist */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				890F670024190F8700F46FF3 /* trainingSheetTableViewCell.swift in Sources */,
 				8964640B240D80390065DBBB /* ViewController.swift in Sources */,
 				890F66FE241829AF00F46FF3 /* Ficha.swift in Sources */,
 				89646407240D80390065DBBB /* AppDelegate.swift in Sources */,
