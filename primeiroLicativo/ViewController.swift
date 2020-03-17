@@ -69,7 +69,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         //PickerView
         pickerView.delegate = self
         pickerView.dataSource = self
-        
+        g
         blurView.isHidden = true
         popUpView.isHidden = true
     }
