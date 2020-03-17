@@ -24,16 +24,10 @@ class TrainingSheetTableViewCell: UITableViewCell, UITextFieldDelegate, UIPicker
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        exerciseField.placeholder = "Selecionar Exercício"
-        exerciseField.textAlignment = .center
-        exerciseField.inputView = pickerView
-        exerciseField.delegate = self
-        repetitionField.delegate = self
-        repetitionField.textAlignment = .center
-        serieField.delegate = self
-        serieField.textAlignment = .center
-        pickerView.delegate = self
-        pickerView.dataSource = self
+        configureExerciseField()
+        configureRepetitionField()
+        configureSerieField()
+        configurePickerView()
     }
     
     @IBAction func endEditingField(_ sender: UITextField) {
@@ -60,5 +54,27 @@ class TrainingSheetTableViewCell: UITableViewCell, UITextFieldDelegate, UIPicker
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         exerciseField.text = arrayExercisesToPickerView[row]
         exerciseField.resignFirstResponder()
+    }
+    
+    func configureExerciseField() {
+        exerciseField.placeholder = "Selecionar Exercício"
+        exerciseField.textAlignment = .center
+        exerciseField.inputView = pickerView
+        exerciseField.delegate = self
+    }
+    
+    func configureRepetitionField() {
+        repetitionField.delegate = self
+        repetitionField.textAlignment = .center
+    }
+    
+    func configureSerieField() {
+        serieField.delegate = self
+        serieField.textAlignment = .center
+    }
+    
+    func configurePickerView() {
+        pickerView.delegate = self
+        pickerView.dataSource = self
     }
 }

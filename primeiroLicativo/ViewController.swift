@@ -25,8 +25,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     @IBAction func buttonCalcule() {
         appendExercisesToTrainingSheet()
-        var result = 0
-        result = trainingSheet.totalTime()
+        let result = trainingSheet.totalTime()
         showResult(result: result)
     }
     @IBAction func addButton() {
@@ -48,9 +47,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        //Esconde o teclado ao tocar na tela
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
+        hideKeyboard()
         //TableView
         tableView.delegate = self
         tableView.dataSource = self
@@ -98,5 +95,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         resultView.isHidden = false
         let finalText = String(result)
         finalResult.text = finalText
+    }
+    
+    func hideKeyboard() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
     }
 }
