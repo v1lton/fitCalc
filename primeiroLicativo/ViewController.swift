@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     //****Attributes****
     var pickerView = UIPickerView()
     var trainingSheet = TrainingSheet()
-    var countForTableview = 3
+    var countForTableview = 1
     
     //****IBs****
     //Buttons
@@ -28,10 +28,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     @IBAction func buttonCalcule() {
         appendExercisesToTrainingSheet()
-        let result = trainingSheet.totalTime()
+        var result = 0
+        result = trainingSheet.totalTime()
         showResult(result: result)
     }
-
+    
     //Labels
     @IBOutlet var finalResult: UILabel!
     
@@ -69,6 +70,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     //My Functions
     func insertNewCellInTableView() {
+        appendExercisesToTrainingSheet()
         let indexPath = IndexPath(row:countForTableview, section: 0)
         countForTableview += 1
         tableView.beginUpdates()
@@ -78,13 +80,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     }
     
     func appendExercisesToTrainingSheet() {
-        let totalOfCells = countForTableview
-        for i in 0...totalOfCells - 1 {
-            let indexPath = IndexPath(row:i , section: 0)
-            let cell:TrainingSheetTableViewCell = tableView.cellForRow(at: indexPath)as! TrainingSheetTableViewCell
-            getExerciseFromTableViewCell(TrainingSheetcell: cell)
-            trainingSheet.arrayExercise.append(cell.exercise)
-        }
+        let indexPath = IndexPath(row:(countForTableview - 1) , section: 0)
+        let cell:TrainingSheetTableViewCell = tableView.cellForRow(at: indexPath)as! TrainingSheetTableViewCell
+        getExerciseFromTableViewCell(TrainingSheetcell: cell)
+        trainingSheet.arrayExercise.append(cell.exercise)
     }
     
     func getExerciseFromTableViewCell(TrainingSheetcell cell: TrainingSheetTableViewCell) {

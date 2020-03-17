@@ -28,9 +28,15 @@ class TrainingSheetTableViewCell: UITableViewCell, UITextFieldDelegate, UIPicker
         exerciseField.inputView = pickerView
         exerciseField.delegate = self
         repetitionField.delegate = self
+        repetitionField.textAlignment = .center
         serieField.delegate = self
+        serieField.textAlignment = .center
         pickerView.delegate = self
         pickerView.dataSource = self
+        
+    }
+    
+    @IBAction func endEditingField(_ sender: UITextField) {
         
     }
     
