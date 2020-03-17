@@ -28,6 +28,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let result = trainingSheet.totalTime()
         showResult(result: result)
     }
+    
     @IBAction func addButton() {
         insertNewCellInTableView()
     }
@@ -63,6 +64,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TrainingSheetTableViewCell", for: indexPath) as! TrainingSheetTableViewCell
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return CGFloat.leastNormalMagnitude
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
     }
     
     //My Functions

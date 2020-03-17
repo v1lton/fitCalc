@@ -30,10 +30,6 @@ class TrainingSheetTableViewCell: UITableViewCell, UITextFieldDelegate, UIPicker
         configurePickerView()
     }
     
-    @IBAction func endEditingField(_ sender: UITextField) {
-        
-    }
-    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
@@ -76,5 +72,6 @@ class TrainingSheetTableViewCell: UITableViewCell, UITextFieldDelegate, UIPicker
     func configurePickerView() {
         pickerView.delegate = self
         pickerView.dataSource = self
+        pickerView.backgroundColor = UIColor.white
     }
 }
