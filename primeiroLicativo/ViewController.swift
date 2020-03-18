@@ -9,12 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
-
     
     //****Attributes****
     var pickerView = UIPickerView()
     var trainingSheet = TrainingSheet()
     var countForTableview = 1
+    let datePicker = UIDatePicker()
     
     //****IBs****
     //Buttons
@@ -39,6 +39,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     //TableViews
     @IBOutlet weak var tableView: UITableView!
     
+    //TextFields
+    @IBOutlet weak var dateField: UITextField!
+    
     //Views
     @IBOutlet var resultView: UIView!
     @IBOutlet var fadeView: UIView!
@@ -55,6 +58,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         //View
         resultView.isHidden = true
         fadeView.isHidden = true
+        //DatePicker
+        createDatePicker()
+        dateField.textAlignment = .center
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,12 +75,49 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
-
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
     
     //My Functions
+    func appendExercisesToTrainingSheet() {
+        let indexPath = IndexPath(row:(countForTableview - 1) , section: 0)
+        let cell:TrainingSheetTableViewCell = tableView.cellForRow(at: indexPath)as! TrainingSheetTableViewCell
+        getExerciseFromTableViewCell(TrainingSheetcell: cell)
+        trainingSheet.arrayExercise.append(cell.exercise)
+    }
+    
+    func createDatePicker() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        toolbar.setItems([doneButton], animated: true)
+        dateField.inputAccessoryView = toolbar
+        dateField.inputView = datePicker
+        datePicker.datePickerMode = .date
+    }
+    
+    @objc func donePressed() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        let dateString = formatter.string(from: datePicker.date)
+        dateField.text = "\(dateString)"
+        self.view.endEditing(true)
+    }
+    
+    func getExerciseFromTableViewCell(TrainingSheetcell cell: TrainingSheetTableViewCell) {
+        cell.exercise.exercise = cell.exerciseField.text!
+        cell.exercise.rep = Int(cell.repetitionField.text!)!
+        cell.exercise.serie = Int(cell.serieField.text!)!
+    }
+    
+    func hideKeyboard() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+    }
+    
     func insertNewCellInTableView() {
         appendExercisesToTrainingSheet()
         let indexPath = IndexPath(row:countForTableview, section: 0)
@@ -85,19 +128,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         tableView.reloadData()
     }
     
-    func appendExercisesToTrainingSheet() {
-        let indexPath = IndexPath(row:(countForTableview - 1) , section: 0)
-        let cell:TrainingSheetTableViewCell = tableView.cellForRow(at: indexPath)as! TrainingSheetTableViewCell
-        getExerciseFromTableViewCell(TrainingSheetcell: cell)
-        trainingSheet.arrayExercise.append(cell.exercise)
-    }
-    
-    func getExerciseFromTableViewCell(TrainingSheetcell cell: TrainingSheetTableViewCell) {
-        cell.exercise.exercise = cell.exerciseField.text!
-        cell.exercise.rep = Int(cell.repetitionField.text!)!
-        cell.exercise.serie = Int(cell.serieField.text!)!
-    }
-    
     func showResult(result: Int) {
         fadeView.isHidden = false
         fadeView.alpha = 0.4
@@ -106,8 +136,5 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         finalResult.text = finalText
     }
     
-    func hideKeyboard() {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
-    }
+    
 }
