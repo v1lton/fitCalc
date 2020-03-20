@@ -69,6 +69,16 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TrainingSheetTableViewCell", for: indexPath) as! TrainingSheetTableViewCell
+        if (indexPath.row != countForTableview - 1) {
+            cell.exerciseField.text = self.trainingSheet.arrayExercise[indexPath.row].exercise
+            cell.repetitionField.text = String(self.trainingSheet.arrayExercise[indexPath.row].rep)
+            cell.serieField.text = String(self.trainingSheet.arrayExercise[indexPath.row].serie)
+        } else {
+            cell.exerciseField.text = ""
+            
+            cell.repetitionField.text = ""
+            cell.serieField.text = ""
+        }
         return cell
     }
     
